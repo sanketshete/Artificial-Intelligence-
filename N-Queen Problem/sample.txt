@@ -1,1 +1,95 @@
 
+N- QUEEN PROBLEM
+
+The N Queen is the problem of placing N chess queens on an N×N chessboard so that no two queens attack each other.
+Here, we are solving n-queen problem by random -restart-hill climbing and min conflict algorithm.
+N Queen FORMULATION:
+Initial State: Arrange every queen in each row in a randomize way.
+Successor function: Add a queen to any squre in the uppermost empty row such that it is not attack by any other queen. 
+Goal State: Arrange every queen in each row such way that none attacked.
+State Space Representation
+
+Public static int [] answer;
+Part 1: Using Random restart hill climbing:
+
+Global Variables for Random Restart Implementation
+
+public static int size;
+public static int numberOfStepChange=0;
+public static int numberOfRestart=0;
+public static Random random[];
+public static int[]answer;
+public static long startTimeForRandom =0;
+
+
+1.	size: size of matrix 
+2.	numberofStepChange: count the number of state change.
+3.	numberofRestart: count the number of restart required. 
+4.	random: Array of Random Class for each row to change the queen position randomly.
+5.	answer: store the position of queen index as row and value of that index as a column
+For Example: answer [0] =2
+ That means queen position is 0th row and 2nd column.
+6.	startTimeForRandom: store the start time of random restart algorithm.
+
+
+
+
+Functions/Procedures
+
+1.	getRandomValue: Take input as a random object and Return the random value.
+2.	hillClimbing:Take input as  an initial arrangement of positions.
+3.	getHeuristic: Calculate and return the heuristic for a state. 
+
+
+Program structure and flow 
+
+1.Take number of queen as input from user.
+2.Check the heuristic value of the state.
+2.a) If the value is 0 then print the output and stop else continue.
+3)store the heuristic value of the state in previous_state variable.
+3) while next state with minimum heuristic not found continue the following steps
+3.a) for each row move the queen to next column 
+3.b) If you find the next state with less heuristic than previous state.
+3.b.a) Replace the previous_state with new minimum value
+4.a) If you find the state with minimum heuristic than the initial state then go to the step 2
+4.b) else randomize the queen positions again and go to step 2 again.
+
+Part 2: Using min-conflict Algorithm:
+
+Global Variables for Random Restart Implementation
+
+public static int size;
+public static int numberOfRestart=0;
+public static Random random1;
+public static int[]answer;
+public static long startTimeForMinConf =0;
+
+1.	size: size of matrix 
+2.	numberofRestart: count the number of restart required. 
+3.	random: Array of Random Class for each row to change the queen position randomly.
+4.	answer: store the position of queen index as row and value of that index as a column
+For Example: answer [0] =2
+      That means queen position is 0th row and 2nd column.
+5.	startTimeForMinConflict: store the start time of min conflict algorithm.
+
+
+Functions/Procedures
+
+4.	getRandomValue: Take input as a random object and Return the random value.
+5.	hillClimbing: Take input as initial arrangement of positions.
+6.	getHeuristic: Calculate and return the heuristic for a state. 
+7.	getHeuristicForparticularQueen: Take rowNumber and array as input and return the number of conflict for particular queen in the respective row.	
+
+Program structure and flow 
+
+1.Take number of queen as input from user.
+2.Initialize the Integer ArrayList name as duplicates.
+2.Repeat following steps
+2.a) for each row repeat the following steps
+2.a.a) find the numbers of conflict for each queen.
+2.a.b) store the rowNumber of minimum or same number of conflicts in a duplicates ArrayList.
+2.b) Get random number from duplicates ArrayList and store it as a maximum Conflict Row.
+2.c) Try to find the column position for a queen of the maximum Conflict Row such that conflict number would be less or equal and store it in duplicates ArrayList.
+2.d) Store that column position for the maximum conflict row.
+2.e) Increase the numberOfStepChange count.
+2.f) If numberOfStepChange equal to size*2 then randomize the array and initialize the numberOfStepChange count to zero.
